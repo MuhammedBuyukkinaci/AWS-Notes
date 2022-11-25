@@ -75,7 +75,21 @@ pip install awscli
 
 22) API Gateway is illustrated below. Common missions of API Gateway is direction, merging and protocol translation. Also, they are responsible for authentication, load balancing, monitoring. "One Api to rule them all".
 
-![pizza](./images/006.png)
+![api_gateway](./images/006.png)
 
+## AWS History
+
+1) AWS was first created in 2002 and launced in 2006.
+
+2) Some AWS Services year by year
+
+![aws_services](./images/007.png)
+
+3) AWS Official Sources:
+
+    - [https://aws.amazon.com/new/](https://aws.amazon.com/new/)
+    - [https://aws.amazon.com/blogs/aws/](https://aws.amazon.com/blogs/aws/)
+
+4) AWS re:invent is a yearly conference held at late November & early December. It is the most transformative event in tech. It is in Las Vegas and more than 40k IT engineers are attending. Its price is around 1800 dollar.
 
 
