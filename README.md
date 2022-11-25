@@ -59,5 +59,23 @@ pip install awscli
 
 17) SaaS is predominant now in industry. SaaS is like renting a car rather than purchasing a car.
 
+18) DevOps is a philasophy, not a method.
+
+19) Docker, Jenkins, Ansible, Chef and Github actions are some softwares that are used in CI/DC processes.
+
+20) Monolith applications are
+
+    - hard to sustain
+    - not flexible
+    - hard to fix
+    - having only one codebase
+    - bulky
+
+21) API is an explicitly defined communication management approach among different applications.
+
+22) API Gateway is illustrated below. Common missions of API Gateway is direction, merging and protocol translation. Also, they are responsible for authentication, load balancing, monitoring. "One Api to rule them all".
+
+![pizza](./images/006.png)
+
 
 
