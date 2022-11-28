@@ -157,6 +157,14 @@ pip install awscli
     - API Gateway: An API management tool bult in front of API.
     - Direct Connect: It is a cloud service faciliating the installation of deciated & private link between our local servers to AWS servers. It is a replacement for internet connection.
 
+6) Migration
+
+    - Migration Hub: A monitoring too for AWS migration operations.
+    - Application Discovery: A service to discover applications on local servers before migration.
+    - Database Migration Service: A migration service for databases. It supports homogeneous( example: Postgresql to Postgresql) & heterogeneous (MySQL to Amazon Aurora) migrations.
+    - Server Migration Service: A service to move local servers to AWS servers.
+    - Snowball: A migration tool to move Petabytes of data to AWS. It is a PHYSICAL device. AWS sends it to you. You put your data into this device in a encrypted way. You send it back to AWS. AWS restores services via this PHYSICAL device.
+
 
 
 
