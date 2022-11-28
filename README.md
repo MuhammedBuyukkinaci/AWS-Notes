@@ -120,6 +120,34 @@ pip install awscli
 
 15) Cost Explorer is a tab in Account page. It enables us to view details of our costs.
 
+## Introduction to AWS Services
+
+1) Compute is listing server services. 
+
+    - EC2 is the most important service.
+    - Lightsait is similar to EC2, but appropriate for test & dev enrionments and small businesses.
+    - ECS is Elastic container service and it is a container orchestration tool.
+    - EKS is Elastic Kubernetes service.
+    - AWS Lambda is providing code execution without server management. You only pay the consumption.
+    - AWS Batch: Automated batch processing.
+    - Elastic Beanstalk: An orchestration service which orchestrates many AWS Serices like EC2, S3, Elastic Load Balancers. It is a PaaS service.
+
+
+2) The 2 hot topics in the industry are Container & Serverless. AWS Lambda is a Serverless service. It reduces costs of developing applications.
+
+3) Storage is listing storage-linked services.
+    - S3: This is the service that booms Cloud Computing. It is storing the data irrespective of its source. S3 is object-base rather than blog-based. We can hold files whose sizes are between 0 KB to 5 TB.
+    - Elastic File System: It can be thought as a flexible hard disk. Many computers can access to it simultaneously.
+    - Glacier: Long-term & cheap & archiving service. Similar to S3.
+    - Storage Gateway: Some firms use their own servers locally. owever, they want to keep their backups on the cloud in case of disaster recovery.
+
+4) Database services are listed below.
+
+    - RDS: Relational database services. It faciliates executing and scaling of databases(Amazon Aorora).
+    - DynamoDB: Nonrelational database services.
+    - ElastiCache: Providing completely managable Redis & Memcached. It is a cache memory service. Used in gaming.
+    - Neptune: Appropriate for Graph DB's.
+    - Redshift: It is a database in fact but specialized in merging different data from different sources. 10x faster than other data warehouses. THe reason why to use Redshift is that we don't want to consume the resources of our databases. Instead, we move the data to Redshift and query in Redshift.
 
 
 
