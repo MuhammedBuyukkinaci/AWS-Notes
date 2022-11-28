@@ -149,7 +149,13 @@ pip install awscli
     - Neptune: Appropriate for Graph DB's.
     - Redshift: It is a database in fact but specialized in merging different data from different sources. 10x faster than other data warehouses. THe reason why to use Redshift is that we don't want to consume the resources of our databases. Instead, we move the data to Redshift and query in Redshift.
 
+5) Networking and Content Delivery
 
+    - VPC: Virtual Private Cloud. It is a virtual network on the cloud. We can customize our network.
+    - CloudFront: It is a CDN(Content Delivery Network) service.
+    - Route53: It is a DNS(Domain Name Service). It is an alternative to GoDaddy. DNS runs on UDP 53 port and this is why it is named as Route53.
+    - API Gateway: An API management tool bult in front of API.
+    - Direct Connect: It is a cloud service faciliating the installation of deciated & private link between our local servers to AWS servers. It is a replacement for internet connection.
 
 
 
