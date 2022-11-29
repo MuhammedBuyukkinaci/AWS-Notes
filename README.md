@@ -184,6 +184,21 @@ pip install awscli
     - AWS Trusted Advisor: A service which suggests best practices for our existing services. For instance, there are 2 cores on our EC2 instance but our CPU doesn't exceed 30%. In this scenario, Trusted Advisor suggests us to reduce core number of our machine.
     - AWS Managed Services: A service listing 3rd party vendors of AWS. You can get support from these vendors. If we don't want to run our AWS infrastructure and want a 3rd party firm to manage it, these firms are ready on Managed Services
 
+8) Security, Identity & Compliance
+
+    - IAM: Identity and Access Management, managing accesses to AWS services and Resources. It is the heart of AWS.
+    - Amazon Cognito: A service to faciliate log in activities via Google, Facebook, Amazon.
+    - Secrets Manager: A service for hiding credentials(API keys, DB username passwords etc). You send a request to Secrets Manager API to use the info in your code.
+    - Guard Duty: A security service monitoring all AWS services. It detectes anomally API calls etc via Machine Learning Algorithms.
+    - Inspector: A security service detecting security bugs in our apps.
+    - Macie: A service detecting sensitive data on S3. Detection is carried out through Machine Learning.
+    - SSO - Single Sign On: Its logic is similar to 1password.
+    - Certificate Manager: A service for SSL/ TLS certificates. Its logic is similar to let's encrypt.
+    - CloudHSM - Hardware Security Module: An encrypting service for our data(not well understood)
+    - AWS Active Directory.
+    - WAF - Web Application Firewall: It protects our apps deployed on AWS from attacks like sql injection.
+    - Shield: A serice protecting us from ddos attacks.
+    - Artifact: A tool to obtain documents for auditing.
 
 
 
