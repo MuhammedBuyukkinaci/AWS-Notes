@@ -120,6 +120,12 @@ pip install awscli
 
 15) Cost Explorer is a tab in Account page. It enables us to view details of our costs.
 
+16) Some Infrastructure as code tools are
+    - Terraform
+    - Ansible
+    - Puppet
+    - Chef
+
 ## Introduction to AWS Services
 
 1) Compute is listing server services. 
@@ -164,6 +170,22 @@ pip install awscli
     - Database Migration Service: A migration service for databases. It supports homogeneous( example: Postgresql to Postgresql) & heterogeneous (MySQL to Amazon Aurora) migrations.
     - Server Migration Service: A service to move local servers to AWS servers.
     - Snowball: A migration tool to move Petabytes of data to AWS. It is a PHYSICAL device. AWS sends it to you. You put your data into this device in a encrypted way. You send it back to AWS. AWS restores services via this PHYSICAL device.
+
+7) Management Tools are used in managing AWS Resources
+
+    - Cloudwatch: A monitoring tool for RAM, CPU, disc, bandwith etc on servers. For example, if CPU limit exceeds 80 %(detected by Cloudwatch), then add a new server etc.
+    - CloudTrail: A monitoring tool for all activities on AWS. Some activities are like who deleted S3 service, who increased the RAM of EC2 etc.
+    - CloudFormation: A service suitable for repetitive task. For example, we create a cluster of virtual servers once a day. Then we are destroying them all. Instead of doing this manually, we are writing our instructions in a file(similar/equivalent to infrastructure as code solutions), then run them on CloudFormation.
+    - Autoscaling: A service to automatically scale AWS resource in case of heavy load(CPU Bound > 80%).
+    - Config: A monitoring tool for configuration settings. Configuration version of CloudTrail. It takes snapshots of current configuration settings.
+    - Opsworks: A service version of Chef & Puppet in AWS world.
+    - SystemCatalog: A service to restrict which IAM users can access to which service.
+    - SystemsManager: A service providing us with managing all of our resources at the same time. For example, we want to upgrade OS's of our EC2 instances to Ubuntu Server 22.04 at the same time. It is possible with SystemsManager.
+    - AWS Trusted Advisor: A service which suggests best practices for our existing services. For instance, there are 2 cores on our EC2 instance but our CPU doesn't exceed 30%. In this scenario, Trusted Advisor suggests us to reduce core number of our machine.
+    - AWS Managed Services: A service listing 3rd party vendors of AWS. You can get support from these vendors. If we don't want to run our AWS infrastructure and want a 3rd party firm to manage it, these firms are ready on Managed Services
+
+
+
 
 
 
