@@ -332,6 +332,62 @@ pip install awscli
 
 9) We can create a role. For example, we want our EC2 instance to access S3 with full access. Role can make it.
 
+### S3
+
+1) S3 is the file storage of AWS. S3 is an object based storage service. S3 stores data as objects in buckets. Buckets are composed of objects. Object = File + Metadata. You can't install an OS on S3. S3 is similar to Microsoft Onedrive, Google Drive, Apple iCloud.
+
+2) Block based vs Object based storage(File based storage)
+
+![s3](./images/014.png)
+
+3) Buckets can be thought as containers for objects. We can have more than 1 bucket. Buckets are region based. Bucket names should be unique among all buckets.
+
+4) We can store our data in 3 different layers. Storage classes can be modified for objects too.
+    - Standard S3: Objects are copied on 3 AZ's. 99.99% availablity.
+    - Standard Infrequent Access: Stored on 3 AZ'S. 99.9% availability.
+    - Standard 1-zone infrequent access: 1AZ, 99.5% availability
+
+5) S3 is an option named S3 Intelligent-Tiering. This option moves objects to the most appropriate layer automatically.
+
+6) Glacier is similar to S3 but different than S3. It should store objects who aren't required to access fast. It is so cheap. It is acting more like an archive. Access time is around 4-5 hours.
+
+7) We can write some rules to move objects to another layer. One rule might be that if the age of the object is bigger than 30 days but lower than 60 days, move it to Standard Infrequent access If it is bigger than 60 days, move it to Glacier.
+
+8) Storing objects in S3 is cheaper than accessing it.
+
+9) We can store data of our applications in S3. This is what differs S3 from Dropbox or Google Cloud.
+
+10) S3 offers
+
+    - read after write consistency after PUTs of new objects in all regions.
+    - offers eventual consistency for overwrite PUTs and DELETE
+
+11) ARN means Amazon Resource Name. It has a pattern  like arn:aws:s3:::my_bucket_name_here. my_bucket_name_here is the name of bucket. It is used from other services aiming to access it.
+
+12) An example S3 URL is below: 
+
+    - https://my_bucket_name_here.s3.amazonaws.com/CV_Muhammed_Buyukkinaci.pdf
+
+13) We can encrypt S3 objects in server side via Amazon AES-256 or AWS-KMS(Key management system).
+
+14) Object = File + Metadata. Metadata means data about file. One metadata might be size of file, another one might be extension of file, another one might be length of file etc. We can retrieve and update metadata through our apps.
+
+15) Tags can be useful in calculating invoices. Let's assume there are 4 teams in our IT department. We want to know which departman is spending least and most. To learn this, tell teams add tags to their objects programatically. Finally, we can learn which company spends most.
+
+16) Object lock is a property on bucket level. It prevents objects from being deleted.
+
+17) Select from is a service on object level. It is making possible to take a glance to csv, json objects in the bucket without downloading the objects.
+
+18) Versioning in S3 is similar to git. It is off by default. If you turn it off, you can only suspend after turning on. After turning on, we are versioning all changes in a file. If we delete an object from the bucket, it isn't deleted in reality & it is labelled as Delete Marker. It is stored in the background. Our API Calls or CLI Requests will not return the deleted objet. However, we can access the deleted object via AWS Console. If we want to restore deleted object, we should delete "delete marker".
+
+19) Server access logging is a property on bucket level. It is saving loggings about request directing to S3 objects. If we want to save loggings for our main S3 bucket, we should create a bucket specific to logging and attach logging bucket to main bucket. While creating this logging bucket, choose *Grant Amazon S3 Log Delivery group write access to this bucket*.
+
+20) Object Level Logging is a property on bucket level. It is similar to Server Access Logging. It is moving data that who accessed our objects etc to CloudTrail service.
+
+21) Static Web Hosting is a property on bucket level. We can host our static websites on S3.
+
+22) We can make encryption operations on bucket level as object level.
+
 
 
 
