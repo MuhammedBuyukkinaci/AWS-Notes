@@ -344,10 +344,13 @@ pip install awscli
 
 4) We can store our data in 3 different tiers. Storage classes can be modified for objects too.
     - Standard S3: Objects are copied on 3 AZ's. 99.99% availablity.
-    - Standard Infrequent Access: Stored on 3 AZ'S. 99.9% availability.
+    - Standard IA(Infrequent Access): Stored on 3 AZ'S. 99.9% availability.
     - Standard 1-zone infrequent access: 1AZ, 99.5% availability
 
-5) S3 is an option named S3 Intelligent-Tiering. This option moves objects to the most appropriate tier automatically.
+5) S3 is an option named S3 Intelligent-Tiering. This option moves objects to the most appropriate tier(Standard or Standard IA) automatically.
+
+    - Intelligent Tiering Archive Configuration(Under Properties)
+    - Standard S3 -> Standard IA -> Archive(Glacier) -> Deep Archive(Glacier)
 
 6) Glacier is similar to S3 but different than S3. It should store objects who aren't required to access fast. It is so cheap. It is acting more like an archive. Access time is around 4-5 hours.
 
@@ -366,7 +369,7 @@ pip install awscli
 
 12) An example S3 URL is below: 
 
-    - https://my_bucket_name_here.s3.amazonaws.com/CV_Muhammed_Buyukkinaci.pdf
+    - https://my_bucket_name_here.s3.amazonaws.com/folder_to_file/CV_Muhammed_Buyukkinaci.pdf
 
 13) We can encrypt S3 objects in server side via Amazon AES-256 or AWS-KMS(Key management system).
 
@@ -390,7 +393,7 @@ pip install awscli
 
 23) Transfer acceleration is a feature on bucket level. It is a paid feature. Let's assume you want to upload a file bigger than 2 TBs. You can upload this file to S3 regularly in 20 days. You can enable transfer acceleration feature to speed up the process. It may take 10 days thanks to transfer acceleration. AWS makes this possible via its CDN network. This feature probably works in the following way. AWS takes the file to its CDN Network first. Then, AWS moves the file to S3 bucket via CDN network. CDN works faster than public internet.
 
-24) Events is a property on bucket level. If you want to trigger an event derived from your existing bucket, you can use this feature. Let's assume you uploaded an image to S3 and want to run image processing code using AWS lambda. You can make it via events.
+24) Events is a property on bucket level. If you want to trigger an event derived from your existing bucket, you can use this feature. Let's assume you uploaded an image to S3 and want to run image processing code using AWS lambda. You can make it via events. You can connect events to SQS(moving data uploaded to S3 to a queue ) or SNS(sensing an email)
 
 25) Requester pays is a feature on bucket level. You have to block public access to enable it. It is a feature that is charging the requester(An AWS account) trying to acces the object in S3 bucket.
 
@@ -412,9 +415,21 @@ pip install awscli
 
 34) Inventory(under Management) is showing us which files are in the bucket by reporting daily or weekly.
 
+35) Access Point is a property on bucket level. In previous times, all applications using the same S3 bucket were accessing to S3 bucket via the same ARN(Amazon Resource Name). However, this made things complicated. Therefore, AWS introduced access points. We can access to same S3 bucket from different applications using different access points. We can configure on access point level. A VPC(Virtual Private Cloud) or Internet can be selected for who can access to S3 bucket. We can also define access point policies. An example access point policy is that only this IAM user should access to this bucket and that user should only access to these files(starting with myfirmname_). Access point is changing ARN and object urls for each access point. An example ARN and Object url via access point are below:
 
+    - arn:aws:s3:region_is_here:1111111111111:accesspoint/accesspoint_name_is_here/object/file_name_here.pdf
 
+    - https://accesspoint_name_is_here-1111111111111.s3-accesspoint.region_is_here.amazonaws.com/file_name_here.pdf
 
+36) Object Lambda Access Point is a new feature of S3 on S3 level. Let's assume you want to download 1000 images from the S3 bucket via your program. However, you want to download a zipped version for convenience. In this scenario, Object Lambda Access Point is an intermediary that takes images from S3 and zips them all in a custom Lambda Function. You are triggering object lambda to get zipped version of images. If object lambda access point is used, its ARN is different than bucket ARN. You should use ARN of Object Lambda Access Point instead of Bucket ARN.
+
+37) We can make some kind of operations on all objects in a S3 bucket. This is called batch operations. It is on S3 level. Possible operations are below in the photo. First step to do this is to list all objects in the bucket via Inventory. Then, use the output(csv file) of Inventory in batch operations as an input.
+
+![batch_operations](./images/015.png)
+
+38) Access Analyzer is a new feature. It is analyzing who accessed to our S3 buckets. It is detecting anomally situations like this IP address accessed to this bucket 1000 times a day etc. It should be enabled in IAM console first. Then, it should be activated for S3 level.
+
+39) Storage Lens is showing us dashboards about different statistics. It is on S3 level. These statistics may be the number of objects in the S3 bucket, total size of S3 bucket etc. Advanced statistics are paid but simple statistics are free. 
 
 
 
