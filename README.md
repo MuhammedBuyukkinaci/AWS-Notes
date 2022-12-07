@@ -431,8 +431,17 @@ pip install awscli
 
 39) Storage Lens is showing us dashboards about different statistics. It is on S3 level. These statistics may be the number of objects in the S3 bucket, total size of S3 bucket etc. Advanced statistics are paid but simple statistics are free. 
 
+### CLI
 
+1) Glacier only allows us to use itself via CLI or SDK. UI of Glacier is existing but it is restricted.
 
+2) After installing AWS CLI, the first step is to enter our credentials that we downloaded while creating our IAM user. Run `aws configure` and enter 
+    - AWS access key and: 123123afasdasdasdpyt
+    - Secret Access Key: 11111aawwe
+    - Default region: eu-west-1
+    - Default Output Format: json
+
+3) CLI works in the following way: `aws SERVICE_NAME PARAMETER`. An example is `aws s3 list`. To get help, run `aws help` or `aws s3 help` or `aws s3 ls help`. To list objects in S3 bucket, run `aws s3 ls s3://bucket_name_is_here`
 
 
 
