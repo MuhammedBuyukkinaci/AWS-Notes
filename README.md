@@ -443,12 +443,27 @@ pip install awscli
 
 3) CLI works in the following way: `aws SERVICE_NAME PARAMETER`. An example is `aws s3 list`. To get help, run `aws help` or `aws s3 help` or `aws s3 ls help`. To list objects in S3 bucket, run `aws s3 ls s3://bucket_name_is_here`
 
+### Glacier
 
+1) If you have to store files for 10 years but you may need to access it once in 10 years, Glacier does this exactly. It is appropriate for archiving Customer Agreements.
 
+2) It is a cold data service. It is actually for archiving, not for storing. You can't access to Glacier S3. You should create a function to move files in Glacier to S3.
 
+3) Its access time is around 3 hours. It is not fast as S3.
 
+![glacier](./images/016.png)
 
+4) Glacier -> Vault(Sales or HR etc) -> Archive. S3 -> Bucket. You can access only to Vaults on AWS Console . To access to archives, use CLI or SDK.
 
+5) To create a Vault on CLI
+
+```
+aws glacier create-vault --account-id - --vault-name myvault
+```
+
+6) Glacier is more complicated than other AWS services.
+
+7) We can't know everything about AWS. It is more complicated than we assume. Always look at AWS tutorials.
 
 
 
