@@ -465,6 +465,29 @@ aws glacier create-vault --account-id - --vault-name myvault
 
 7) We can't know everything about AWS. It is more complicated than we assume. Always look at AWS tutorials.
 
+### EC2
 
+1) The most used AWS service is EC2.
 
+2) Different Pricing Options:
+    - On demand: It is a service of pay as you use. It is hourly charged. Used for testing purposes.
+    - Reserved Instance(RI): You promise to use AWS more than 1 year. It is cheaper by 30 percent or more.
+    - Scheduled Reserved Instance: Let's assume you want to run a VM between 8:00 am and 5:00 pm. YOu also promise to use this service more than 1 year.
+    - Spot: Based on offer. You bid 0.004 dollar for a VM. Your offer matches if your price is above the limit. If it doesn't match, your VM got closed. Some third party firms launched some programs to automize bidding for spot machines.
+    - Dedicated Host: A physical machine dedicated for us. We chose this due to some regulations.
+
+3) EC2 Instance Types
+
+![ec2_instance_types](./images/017.png)
+
+4) M5 means fifth generation of M servers. C4 means fourth generation of C.
+
+5) ECU means elastic compute unit. It is showing us the performance of CPU. The more the better. It is a term introduced by AWS to compare CPU performances.
+
+6) Large and Xlarge EC2 instances.
+![large](./images/017.png)
+
+7) AWS launced arm64 based CPU servers. They are named as A1.
+
+8) AWS uses Intel CPU's generally. Recently, AWS also collaborated with AMD to release new servers wtih AMD CPU. They are cheaper by 10 percent on average. These new servers are under the category of M5a and T5a.
 
