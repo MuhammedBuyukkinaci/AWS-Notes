@@ -143,7 +143,7 @@ pip install awscli
 
 3) Storage is listing storage-linked services.
     - S3: This is the service that booms Cloud Computing. It is storing the data irrespective of its source. S3 is object-base rather than blog-based. We can hold files whose sizes are between 0 KB to 5 TB.
-    - Elastic File System: It can be thought as a flexible hard disk. Many computers can access to it simultaneously.
+    - EFS(Elastic File System): It can be thought as a flexible hard disc. Many computers can access to it simultaneously.
     - Glacier: Long-term & cheap & archiving service. Similar to S3.
     - Storage Gateway: Some firms use their own servers locally. owever, they want to keep their backups on the cloud in case of disaster recovery.
 
@@ -485,9 +485,100 @@ aws glacier create-vault --account-id - --vault-name myvault
 5) ECU means elastic compute unit. It is showing us the performance of CPU. The more the better. It is a term introduced by AWS to compare CPU performances.
 
 6) Large and Xlarge EC2 instances.
-![large](./images/017.png)
+![large](./images/018.png)
 
 7) AWS launced arm64 based CPU servers. They are named as A1.
 
 8) AWS uses Intel CPU's generally. Recently, AWS also collaborated with AMD to release new servers wtih AMD CPU. They are cheaper by 10 percent on average. These new servers are under the category of M5a and T5a.
+
+9) [https://instances.vantage.sh/](https://instances.vantage.sh/) is a website comparing different EC2 instances.
+
+10) Instance store(Ephemeral) is something that is built on a physical server. It is faster but vulnerable to problems. The problems might be electicity cutoffs, hardware problems. The data isn't protected therefore it is lost. Snapshot isn't available.
+
+11) Elastic Block Store(EBS) is a storage type that we can install an OS on top of it. It is separating data from OS. Snapshot is available. It is block based. It is less vulnerable to problems.
+
+![EBS](./images/019.png)
+
+12) IOPS means input output per second. The more the better. It is bigger in SSD's rather than HDD's. It is similar to 0-100 speed of a car.
+
+13) Throughput means the volume of work done. The more the better. It is bigger in HDD's rather than SSD's. It should be big enough for big data servers.
+
+![EBS_storage](./images/020.png)
+
+14) AMI(Amazon Machine Image) is providing us with an OS. AMI can be public(ubuntu, centos) or private(an OS that a firm installed its own SaaS on top of it).
+
+15) ENA means Enhanced Network Adapter. It is enabled or disabled.
+
+16) Hypervisor can be HVM or paravirtual. Paravirtual became obsolete. Most VM's chose Hypervisor.
+
+17) We can choose IAM role(EC2 to S3 connection etc.) or create a new IAM role when creating an EC2 instance.
+
+18) Shutdown Behavior might be Stop or Terminate. These options mean what to do when shutdowning the computer. Stop means paying for the disc consumed. Terminate is killing off the VM and its data.
+
+19) Termination Protection means whether you can terminate the VM using API or CLI or not.
+
+20) Monitoring is normally carried out once in 5 minutes. If it is enabled, it is carried out once in a minute. This is a paid service if enabled.
+
+21) Tenancy means whether the VM runs on a shared or a dedicated machine.
+
+22) We can append new storages to a VM. These storages can be an SSD or HDD etc. We can arrange the capacity of the disc appended.
+
+23) We can add tags to EC2 instances.
+
+24) Security group can be thought as a security wall in front of this VM. All trafic directing to a VM is blocked by default. We can add rules to a security group.
+
+    - Firstly, create a security group.
+    - Secondly, add this security group to your VM.
+    - Thirdly(Optional), add the security group to another VM you created. 
+
+![security_group](./images/021.png)
+
+25) We can create an AMI(Amazon Machine Image) from a VM. It is similar to creating a docker image from a container.
+
+26) We can see public IP of our EC2 instance, system status, monitoring(CPU utilization, Disc reads, Disc writes etc. )
+
+27) To connect to an EC2 instance from our local computer.
+
+```connect.sh
+# set permissions
+chmod 400 file_name_is_here.pem
+# connect code
+ssh -i file_name_is_here.pem ec2-user@IP_V4_IS_HERE
+# move to root user
+sudo su
+# to list buckets in ec2 instance(because we assigned roles when creating instance).
+# we can change it in AWS Console later.
+aws s3 ls
+# to copy a file from s3 to ec2 instance
+aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
+
+```
+
+28) Putty is an SSH client for Windows. It is also available in Linux. It doesn't support ppm files. Thus, it is required to convert ppm file to ppk.
+
+29) We can write some shellscript code before VM started.
+
+#### ELB - Elastic Load Balancing
+
+30) ELB means Elastic Load Balancing. Load balancer is a network device in reality. You are configuring the request to the device first, then the device directs the requests to VM'S behind itself.
+
+31) Illustration of Load Balancing
+
+![elb_illustration](./images/022.png)
+
+32) Different Types of ELB. Classical Load Balancer serves since 2009. Network Load Balancer work in layer 4, which means no check for packets received, but just directs. Application Load Balancer work in layer 7, which read packets receieved and directs according to packets. If we need a fast & simple LB service for TCP ports, Network Load Balancer should be our choice. If we need to deal with containers, http, https etc, the choice should be application load balancer.
+
+![elb_types](./images/023.png)
+
+#### AutoScaling
+
+33) Autoscaling is automatically adding a VM or removing a VM according to requests. The automatic process is dependent on our custom rules. THe rule might be that add a new VM if CPU usage exceeds 90% for 5 minutes and remove a VM if its CPU usage becomes below under 30%.
+
+#### Placement Group
+
+34) Placement Group is not used frequently. However, it is asked in the exam.
+
+![placement_group](./images/024.png)
+
+35) Placement Group is putting our VM's in a group. It is mostly on the same physical machine(placement group) or in the cluster of physical machines(spread placement group). This feature is especially useful in the case of low latency and high throughput. VM's in the same placement group should have the same server type(C2 or M3 etc). VM's should be created at the same time(4 of them now, 2 of them tomorrow isn't recommended).
 
