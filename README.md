@@ -1,6 +1,6 @@
 # AWS-Notes
 
-This is listing my learning from [Cloud Computing Basics and Introduction to AWS Solution Architect](https://www.udemy.com/course/bulut-bilisim-temelleri-ve-aws-cozum-mimarligina-giris/).
+This is listing my learnings from [Cloud Computing Basics and Introduction to AWS Solution Architect](https://www.udemy.com/course/bulut-bilisim-temelleri-ve-aws-cozum-mimarligina-giris/).
 
 ## Introduction & Cloud History
 
@@ -645,5 +645,27 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 45) Normally, root discs aren't encrypted. The way to encrypt a root disc is to take snapshot first and copy it to another region by enabling encryption option.
 
+### EFS - Elastic File System
+
+1) EFS and EBS are similar but different.
+
+2) EBS has 2 drawbacks
+    - It is manually operated. You create an EBS, attach it to a VM, increase the capacity or reduce the capacity manually.
+    - We can attach an EBS to only one VM. Attaching an EBS to many VM's isn't possible.
+
+3) EFS isn't a disc. You can't install an OS on top of it. EFS is a NFS-based file storage. It is expanded as you add more and shrunk as you delete files. Many VM's(irrespective of on premise or EC2'S, more than 1000) can access to EFS simultaneously. You are paying as your usage.
+
+4) EFS is creating a shared file environment for many VM's. Let's assume we have 3 VM's behind ELB. All of these 3 VM's include codes of our app. If we want to modify something on our code, we need to change our code on 3 machines. However, if all VM's look into EFS and we modify our code in EFS, the change will be ctive in all VM's. This is where EFS is useful.
+
+5) The steps to use EFS are as follows
+
+    - Create 2 EC2 instances
+    - Create a security group that EFS is going to use. This security group will define who can access.
+    - Create an EFS using the previosly defined security group.
+    - SSH into EC2 instances and mount EFS as a directory.
+
+6) As of 2021, EFS has access tiers like S3(Standard, Standard IA, Standard IA One Zone etc).
+
+7) As of 2021, EFS introduced access points feature similar to S3.
 
 
