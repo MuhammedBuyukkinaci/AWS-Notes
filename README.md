@@ -505,7 +505,7 @@ aws glacier create-vault --account-id - --vault-name myvault
 
 ![EBS_storage](./images/020.png)
 
-14) AMI(Amazon Machine Image) is providing us with an OS. AMI can be public(ubuntu, centos) or private(an OS that a firm installed its own SaaS on top of it).
+14) AMI(Amazon Machine Image) is providing us with an OS. AMI can be public(ubuntu, centos) or private(an OS that a firm installed its own SaaS on top of it) or custom. We can take snapshot of an EC2 instance and then create a custom image from this snapshot. Then, this custom image can be used to instantiate new VM's. Creating a custom Image & using it for new VM's is a commonly used practice in the industry.
 
 15) ENA means Enhanced Network Adapter. It is enabled or disabled.
 
@@ -544,6 +544,8 @@ aws glacier create-vault --account-id - --vault-name myvault
 chmod 400 file_name_is_here.pem
 # connect code
 ssh -i file_name_is_here.pem ec2-user@IP_V4_IS_HERE
+# copy a file to remote server or vice versa via scp
+scp -r -i private_key local_file_path remote_user@REMOTE_IP:/path/on/remote
 # move to root user
 sudo su
 # to list buckets in ec2 instance(because we assigned roles when creating instance).
@@ -560,19 +562,44 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 #### ELB - Elastic Load Balancing
 
-30) ELB means Elastic Load Balancing. Load balancer is a network device in reality. You are configuring the request to the device first, then the device directs the requests to VM'S behind itself.
+30) ELB means Elastic Load Balancing. Load balancer is a network device in reality. You are configuring the request to the device first, then the device directs the requests to VM'S behind itself. We can build the LB open to internet or open only to internal requests. LB's have components: Listener(A listener is a process that checks for connection requests using the port and protocol you configure, for example HTTP 80 or HTTPS 443) & Target Group(The services that Listener directs requests to). Target Group can be
+    - instance: LB redirects to an EC2 instance behind itself
+    - IP: LB redirects to an EC2 instance behind itself.
+    - Lambda: The request triggers a lambda function
 
 31) Illustration of Load Balancing
 
 ![elb_illustration](./images/022.png)
 
-32) Different Types of ELB. Classical Load Balancer serves since 2009. Network Load Balancer work in layer 4, which means no check for packets received, but just directs. Application Load Balancer work in layer 7, which read packets receieved and directs according to packets. If we need a fast & simple LB service for TCP ports, Network Load Balancer should be our choice. If we need to deal with containers, http, https etc, the choice should be application load balancer.
-
+32) Different Types of ELB exist. Classical Load Balancer serves since 2009. Network Load Balancer work in layer 4, which means no check for packets received, but just directs. Application Load Balancer work in layer 7, which read packets receieved and directs according to packets. If we need a fast & simple LB service for TCP ports, Network Load Balancer should be our choice. If we need to deal with containers, http, https etc, the choice should be application load balancer.
 ![elb_types](./images/023.png)
+
+    - ELB's check health status of EC2 instances behind itself. If the behind device isn't working properly, ELB doesn't direct requests. ELB checks health status of behind instances via HTTP. We can create customized health check rules. One rule might be that if the instance is down twice in a minute, it is labelled as unhealthy etc.
+
+    - After creating the ELB, we don't see the IP address of it. We just see its DNS name.
 
 #### AutoScaling
 
-33) Autoscaling is automatically adding a VM or removing a VM according to requests. The automatic process is dependent on our custom rules. THe rule might be that add a new VM if CPU usage exceeds 90% for 5 minutes and remove a VM if its CPU usage becomes below under 30%.
+33) Autoscaling is automatically adding a VM or removing a VM according to requests. The automatic process is dependent on our custom rules. The rule might be that add a new VM if CPU usage exceeds 90% for 5 minutes and remove a VM if its CPU usage becomes below under 30%.
+
+    - Autoscaling is composed of 2 main components. The first one is Launchconfig(just not for Autoscaling). Launchconfig covers all of the configurations(which image to use, mount external volumes etc) to instantiate an EC2 instance. Launchconfig is similar to creating to an EC2 instance except no creation happens.
+
+    - After creating a Launchconfig, we should create AutoScaling Group. This group will use LaunchConfig in the previous step. We can set the number of VM's under AutoScaling Group(like between 2-7 etc). 2-7 machines means there should be at least 2 machines or at most 7 machines. Autoscaling group enables us to add VM's to machines behind an ELB.
+
+        - Create an ELB.
+        - Create a Launchconfig.
+        - Create Autoscaling group via launchconfig created above. This autoscaling group should use above ELB configuration to add more VM's to an existing architecture.
+
+    - Scaling between 2-7 can be based on different criteria. We can also customize this like if CPU utilization is above 90 percent, add a new VM or CPU utilization is under 30 percent, delete a VM. 
+        - CPU utilizations
+        - Network in
+        - Network out
+        - Request count per target.
+
+    - We can also link autoscaling to SNS(Simple Notification Service) for notifications.
+
+    - Let's assume there is an ELB and 2 machines are behind it. We created a LaunchConfig and then defined an AutoScaling group linked to this ELB. This config tells us there should be at least 2 VM's or at most 4 VM'S. After this LaunchConfig, there occurs at least 4 machines behind ELB. This is because the formerly created VM's aren't relevant to LaunchConfig and Autoscaling group. However, these 2 formerly created VM'S can be attached subsequently to an Autoscaling group and this may reduce machine count to 2 instead of 4.
+
 
 #### Placement Group
 
@@ -581,4 +608,42 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 ![placement_group](./images/024.png)
 
 35) Placement Group is putting our VM's in a group. It is mostly on the same physical machine(placement group) or in the cluster of physical machines(spread placement group). This feature is especially useful in the case of low latency and high throughput. VM's in the same placement group should have the same server type(C2 or M3 etc). VM's should be created at the same time(4 of them now, 2 of them tomorrow isn't recommended).
+
+36) We can create a Windows Server EC2 instance. In security group, RDP( using TCP port 3389) should be added to security group. After creating the EC2 instance, exchange your private key with a user/password combination via Choose Windows Server EC2 instance > Actions > Security > Get Windows Password.
+
+#### Elastic Block Storage - EBS
+
+37) Snapshot(under EBS) is a feature for EC2 service. It is taking snapshots of disc that EC2 was build on. These snapshots are stored in S3 bucket in the background. If we want to take snapshot of an EC2 instance(root disc), the disc should be shut down first and then snapshot should be taken. If we are taking snapshot of an attached volume, the volume should be detached first or the EC2 instance that the volume is attached should be shut down and then the snapshot of attached volume should be taken.
+    - Snapshots can be attached as volume to a news EC2 instance
+    - Snapshots can be used as AMI to create a template EC2 instance for further usages.
+    - Snapshots can be copied to another region of AWS.
+
+38) We can create volumes and then mount these volumes to existing EC2 instances(Windows Server or Ubuntu Server etc). Volumes can be thought as HDD's or SSD's. If you want to attach a volume to an EC2, both should be in the same AZ. We can attach a volume to a running EC2 instance.
+
+39) While creating a new EC2, its root disc can't be encrypted initially. After creating the EC2 instance, root disc can be encrypted later.
+
+40) However, we can assign ecryption to volumes in the creation phase.
+
+41) Volume sizes are flexible. You can increase or decrease its capacity without deleting or recreating it. The content of the volume is protected, which means increasing or decreasing doesn't affect its content. This flexibility is a superior advantage of Cloud over physical machines.
+
+42) IOPS means input output per second. IOPS has a maximum value with respect to volume size.
+
+43) RAID has 0,1,5,10 specifications. It is the name of the technology that enables using multiple discs together.
+
+    - Raid 0: 2 discs used, data distributed equally to both discs. No data protection. If an error prompts an error, all data disappears. If we got 10k IOPS value from a single disc, 20k IOPS value obtained via 2 discs.
+
+    ![RAID_0](./images/025.png)
+
+    - Raid 1: 2 discs used. Data is protected. If an error prompts in one disc, data can be accessbile from the second disc. No speed up.
+
+     ![RAID_1](./images/026.png)
+
+    - Raid 5: At least 3 discs used. Data is protected. IOPS is increased. There is a concept named parity. If a disc is broken, parity will help recovery. If we have 3 discs and each disc has a capacity of 20 GB, total capacity becomes 40 GB.
+     ![RAID_5](./images/027.png)
+
+44) If an EC2 instance is terminated, its root disc is deleted. However, the attached discs aren't deleted. We can attach these previosly-attached discs to another EC2 instance.
+
+45) Normally, root discs aren't encrypted. The way to encrypt a root disc is to take snapshot first and copy it to another region by enabling encryption option.
+
+
 
