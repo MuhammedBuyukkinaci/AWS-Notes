@@ -472,7 +472,7 @@ aws glacier create-vault --account-id - --vault-name myvault
 2) Different Pricing Options:
     - On demand: It is a service of pay as you use. It is hourly charged. Used for testing purposes.
     - Reserved Instance(RI): You promise to use AWS more than 1 year. It is cheaper by 30 percent or more.
-    - Scheduled Reserved Instance: Let's assume you want to run a VM between 8:00 am and 5:00 pm. YOu also promise to use this service more than 1 year.
+    - Scheduled Reserved Instance: Let's assume you want to run a VM between 8:00 am and 5:00 pm. You also promise to use this service more than 1 year.
     - Spot: Based on offer. You bid 0.004 dollar for a VM. Your offer matches if your price is above the limit. If it doesn't match, your VM got closed. Some third party firms launched some programs to automize bidding for spot machines.
     - Dedicated Host: A physical machine dedicated for us. We chose this due to some regulations.
 
@@ -562,7 +562,7 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 #### ELB - Elastic Load Balancing
 
-30) ELB means Elastic Load Balancing. Load balancer is a network device in reality. You are configuring the request to the device first, then the device directs the requests to VM'S behind itself. We can build the LB open to internet or open only to internal requests. LB's have components: Listener(A listener is a process that checks for connection requests using the port and protocol you configure, for example HTTP 80 or HTTPS 443) & Target Group(The services that Listener directs requests to). Target Group can be
+30) ELB means Elastic Load Balancing. Load balancer is a network device in reality. You are configuring the request to the device first, then the device directs the requests to VM's behind itself. We can build the LB open to internet or open only to internal requests. LB's have components: Listener(A listener is a process that checks for connection requests using the port and protocol you configure, for example HTTP 80 or HTTPS 443) & Target Group(The services that Listener directs requests to). Target Group can be
     - instance: LB redirects to an EC2 instance behind itself
     - IP: LB redirects to an EC2 instance behind itself.
     - Lambda: The request triggers a lambda function
@@ -574,15 +574,15 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 32) Different Types of ELB exist. Classical Load Balancer serves since 2009. Network Load Balancer work in layer 4, which means no check for packets received, but just directs. Application Load Balancer work in layer 7, which read packets receieved and directs according to packets. If we need a fast & simple LB service for TCP ports, Network Load Balancer should be our choice. If we need to deal with containers, http, https etc, the choice should be application load balancer.
 ![elb_types](./images/023.png)
 
-    - ELB's check health status of EC2 instances behind itself. If the behind device isn't working properly, ELB doesn't direct requests. ELB checks health status of behind instances via HTTP. We can create customized health check rules. One rule might be that if the instance is down twice in a minute, it is labelled as unhealthy etc.
+    - ELB checks health status of EC2 instances behind itself. If the behind device isn't working properly, ELB doesn't direct requests. ELB checks health status of behind instances via HTTP. We can create customized health check rules. One rule might be that if the instance is down twice in a minute, it is labelled as unhealthy etc.
 
     - After creating the ELB, we don't see the IP address of it. We just see its DNS name.
 
 #### AutoScaling
 
-33) Autoscaling is automatically adding a VM or removing a VM according to requests. The automatic process is dependent on our custom rules. The rule might be that add a new VM if CPU usage exceeds 90% for 5 minutes and remove a VM if its CPU usage becomes below under 30%.
+33) Autoscaling is automatically adding a VM or removing a VM according to request counts. The automaticon process is dependent on our custom rules. The rule might be that add a new VM if CPU usage exceeds 90% for 5 minutes and remove a VM if its CPU usage becomes below under 30%.
 
-    - Autoscaling is composed of 2 main components. The first one is Launchconfig(just not for Autoscaling). Launchconfig covers all of the configurations(which image to use, mount external volumes etc) to instantiate an EC2 instance. Launchconfig is similar to creating to an EC2 instance except no creation happens.
+    - Autoscaling is composed of 2 main components. The first one is Launchconfig(just not for Autoscaling). Launchconfig covers all of the configurations(which image to use, mount external volumes etc) to instantiate an EC2 instance. Launchconfig is similar to Dockerfile or recipy of a meal. Launchconfig is similar to creating to an EC2 instance except no creation happens.
 
     - After creating a Launchconfig, we should create AutoScaling Group. This group will use LaunchConfig in the previous step. We can set the number of VM's under AutoScaling Group(like between 2-7 etc). 2-7 machines means there should be at least 2 machines or at most 7 machines. Autoscaling group enables us to add VM's to machines behind an ELB.
 
@@ -614,7 +614,7 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 #### Elastic Block Storage - EBS
 
 37) Snapshot(under EBS) is a feature for EC2 service. It is taking snapshots of disc that EC2 was build on. These snapshots are stored in S3 bucket in the background. If we want to take snapshot of an EC2 instance(root disc), the disc should be shut down first and then snapshot should be taken. If we are taking snapshot of an attached volume, the volume should be detached first or the EC2 instance that the volume is attached should be shut down and then the snapshot of attached volume should be taken.
-    - Snapshots can be attached as volume to a news EC2 instance
+    - Snapshots can be attached as volume to a new EC2 instance
     - Snapshots can be used as AMI to create a template EC2 instance for further usages.
     - Snapshots can be copied to another region of AWS.
 
