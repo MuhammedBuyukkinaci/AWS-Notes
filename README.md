@@ -668,4 +668,36 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 7) As of 2021, EFS introduced access points feature similar to S3.
 
+### Virtual Private Cloud - VPC
+
+1) VPC is a feature to make our private virtual network.
+
+2) Each region is coming with a default VPC. However, we can add 5 more VPC's. 5 is a soft limit. If we require more, we can request it from AWS.
+
+![VPC](./images/028.png)
+
+3) Each VPC has an IP interval that we defined before. That means that we define an IP interval to be used in the VPC.
+
+4) 10.0.0.0/16 is the widest private CDR block that we can use in VPC. This makes possible to use IP's between 10.0.0.0 and 10.0.255.255. This IP block can be splitted to sub networks called subnets. These subnets can be either private(DB Servers, accessible only from VPC) or public(accessible from the internet). Subnets reside in AZ's. One subnet can't be in two AZ's at the same time.
+
+5) All traffic settings(describing how subnet A can go to subnet B or how subnet C can access to the internet) can be configured under routing table.
+
+6) Network ACL(Access Control List) is determining which traffic goes to which subnet or what kind of traffic goes from which subnet to the internet.
+
+8) We can create our EC2 instances via security groups using VPC that we customized.
+
+9) Public Subnets can access to the internet via Internet Gateway(named in AWS). Internet Gateway is similar to router of our home modems.
+
+10) VPN gateway is defining a connection between a company and a VPC.
+
+11) We can also create private endpoint links to access from S3 or DynamoDB.
+
+12) VPC's can communicate with each other via a connection named peer.
+
+![VPC](./images/029.png)
+
+
+
+
+
 
