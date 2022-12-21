@@ -525,7 +525,7 @@ aws glacier create-vault --account-id - --vault-name myvault
 
 23) We can add tags to EC2 instances.
 
-24) Security group can be thought as a security wall in front of this VM. All trafic directing to a VM is blocked by default. We can add rules to a security group.
+24) Security group can be thought as a security wall in front of this VM. All trafic directing to a VM is blocked by default. We can add rules to a security group. Secuirty Groups are assigned to resources(EC2, EFS, RDS etc). In a security group, there are inbound rules(who can access to our resource) and outbound rules(where our resource can access). Inbound rules are truned off by default. Outbound rules are allowing the resource to access to all destinations by default. The steps to create a security group:
 
     - Firstly, create a security group.
     - Secondly, add this security group to your VM.
@@ -678,15 +678,15 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 3) Each VPC has an IP interval that we defined before. That means that we define an IP interval to be used in the VPC.
 
-4) 10.0.0.0/16 is the widest private CDR block that we can use in VPC. This makes possible to use IP's between 10.0.0.0 and 10.0.255.255. This IP block can be splitted to sub networks called subnets. These subnets can be either private(DB Servers, accessible only from VPC) or public(accessible from the internet). Subnets reside in AZ's. One subnet can't be in two AZ's at the same time.
+4) 10.0.0.0/16 is the widest private CIDR(Classless Inter-Domain Routing) block that we can use in VPC. This makes possible to use IP's between 10.0.0.0 and 10.0.255.255. This IP block can be splitted to sub networks called subnets. These subnets can be either private(DB Servers, accessible only from VPC) or public(accessible from the internet). Subnets reside in AZ's. One subnet can't be in two AZ's at the same time. AWS doesn't allow you to extend IP range after creation.
 
 5) All traffic settings(describing how subnet A can go to subnet B or how subnet C can access to the internet) can be configured under routing table.
 
 6) Network ACL(Access Control List) is determining which traffic goes to which subnet or what kind of traffic goes from which subnet to the internet.
 
-8) We can create our EC2 instances via security groups using VPC that we customized.
+8) We can create our EC2 instances via security groups(SG) using VPC that we customized.
 
-9) Public Subnets can access to the internet via Internet Gateway(named in AWS). Internet Gateway is similar to router of our home modems.
+9) Public Subnets can access to the internet via Internet Gateway(named in AWS). Internet Gateway is similar to router of our home modems. Enabling Internet Gateway means turning on internet acccess. After creating internet gateway, it should be attached to VPC.
 
 10) VPN gateway is defining a connection between a company and a VPC.
 
@@ -695,6 +695,64 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 12) VPC's can communicate with each other via a connection named peer.
 
 ![VPC](./images/029.png)
+
+13) [mxtoolbox.com](https://mxtoolbox.com/subnetcalculator.aspx) is a website to calculate IP ranges.
+
+14) **10.10.10.0/24** means a range between **10.10.10.0** and **10.10.10.255**. **10.10.10.0** means where the IP black starts. **/24** means the size of IP block. There are 256 IP's in this range. However, not all of these IP's can be used. 10.10.10.0 describes the name(network address) of subnet, therefore can't be assigned to a machine. **10.10.10.255** is broadcast address of subnet, therefore can't be assigned to a machine. Some other non-assignable IP's and the reasons are in the below image. There are 251 available IP's which are ready to be used.
+
+![VPC](./images/030.png)
+
+15) NAT Gateway is making our private subnets to receive updates from the internet. However, it is also protecting our private subnets from being accessed from the internet.
+
+16) After creating a new VPC, it is important to enable DNS host name feature.
+
+17) When a VPC is created, a route table is also created by default. Route table is defining where and how our VPC can access.
+
+18) The VM's that we want to locate in public subnets should have a public IP addresses.
+
+19) Bastion Host(Jump Server, 'Zıplama Tahtası' in Turkish) is a VM running in public subnet. It is enabling us to access to VM's in private networks. This is industry standard. All important machines are located in private network and a VM(Jumpbox Server) is located in public network. All security configurations, all updates are patched to this Jumpbox Server.
+
+20) ICMP is the protocol of ping packages. It should be added to our SG in order to ping from a VM in public network to a VM in private network.
+
+21) The steps to create and configure a VPC
+
+    - 1) Create VPC(creating a route table by default)
+    - 2) Enable DNS host name under VPC
+    - 3) Create an Internet Gateway(IG)
+    - 4) Attach the IG to VPC
+    - 5) Edit routes under Route Table. Add a route whose destination is 0.0.0.0/0(the internet) and whose IG is our formerly created IG.
+    - 6) Create our Subnets. When you create a subnet and link it to a VPC, the subnet is also communucating with the route table of the VPC. This leads private subnets to access to the internet, which is something that we don't want. To overcome this issue, create a separate route table for private subnets and link private subnets to this new routing table.
+    - 7) After creating this new routing table for private subnets, select this new routing table and select private subnets under subnet associations tab of routing table.
+    - 8) VM's in public subnets should access to the internet and have a public IP address. Under subnets, click **modify auto-assign IP settings** and enable **auto assign ipv4 address**.
+    - 9) Create an EC2 instance under public subnet. Create an EC2 instance under private subnet.
+
+22) Network ACL's and Security Groups(SG) are under Security in VPC. Each subnet should have 1 Network ACL. One Network ACL may be assigned to multiple subnets. Network ACL's can be regarded as SGs per subnets. The difference between Network ACL's and SGs is that network ACL's are assigned to subnets, SGs are assigned to VM's or RDS instances.
+
+23) Network ACL's are including rules. The following is an example Network ACL. The results are checked based on their rule number. The lower the rule number, the more prior the rule.
+
+| Rule Number   | Source IP     | Destination IP | Port          | Allow/Deny    |
+| ------------- | ------------- | -------------  | ------------- | ------------  |
+| 10            | Any           | Any            | 80            | Allow         |
+| 20            | 100.1.5.7     | 5.6.7.8        | 80            | Deny          |
+| 30            | Any           | Any            | 22            | Deny          |
+
+24) The following is a SG assigned to an EC2 instance. The following is an example of a SG.
+
+|  Source IP      | Port          |
+|  -------------  | ------------- |
+|  Any            | 80            |
+|  5.6.7.8        | 80            |
+|  Any            | 22            |
+
+24) Let's assume there are 5 VM's in our subnet. We defined a Network ACL and assigned it to our subnet. A user with 8.9.10.11 IP tries to access to our EC2 instance placed in a subnet via port 80. The packages are first coming to subnet ACL. The packages are checked on Network ACL. If they are allowed, the packages are entering the subnet. Then, they are coming to destination EC2 instances. The Destination EC2 instances are checking packages based on SGs.
+
+25) Network ACL's are also including the rules meaning which EC2 instances in the subnet can access to which EC2 instances.
+
+26) Network ACL's are also including inbound rules and outbound rules like SGs.
+
+27) Another important difference between SGs and Network ACL's is that SG's only allow but Network ACL's are able to allow or deny on inbound/outbound rules.
+
+
 
 
 
