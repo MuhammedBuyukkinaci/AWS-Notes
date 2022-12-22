@@ -789,9 +789,18 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 37) After creating a peering connection, attach it to routing tables via routes. Add a route with peering connection on existing routing tables.
 
+### DirectConnect and VPN
 
+1) VPN gateway is an itermediary between AWS(Virtual Private Gateway) and the network device of the company(Customer Gateway). The connection is encrypted and on the internet. This solution isn't useful in scenarios requiring high speed and broad bandwidth.
 
+![vpn](./images/033.png)
 
+2) AWS developed a solution named Direct Connect. This is an alternative to above approach. Direct connect is a network service which is an output of AWS's agreements with Network partners(Turkcell, Türk Telekom etc.). As of 2019, this service isn't available in Turkey.
 
+3) Direct Connect works in the following way:
+    - An agreement between Network partners and AWS
+    - High speed, closed, broad bandwith connection between AWS and its network partners
+    - Connecting your company to network partner
+    - Connecting your company to AWS VPC or public AWS services(S3 etc) via [IEEE 802.1Q WLAN](https://en.wikipedia.org/wiki/IEEE_802.1Q)
 
-
+![directconnect](./images/034.png)
