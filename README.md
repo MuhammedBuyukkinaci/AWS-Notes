@@ -645,6 +645,8 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 45) Normally, root discs aren't encrypted. The way to encrypt a root disc is to take snapshot first and copy it to another region by enabling encryption option.
 
+46) When we stopped an EC2 instance and started again, its public IP address changes. To overcome this, create an Elastic IP under VPC and assign this elastic IP address to EC2 instance.
+
 ### EFS - Elastic File System
 
 1) EFS and EBS are similar but different.
@@ -752,6 +754,40 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 27) Another important difference between SGs and Network ACL's is that SG's only allow but Network ACL's are able to allow or deny on inbound/outbound rules.
 
+#### Elastic IP
+
+28) We can create a fixed IP via VPC > Elastic IP's > Allocate Elastic IP addresses. Then associate this IP address to an EC2 instance. Then, EC2 instance will have the same IP irrespective of stopping and starting.
+
+#### NAT Gateway and NAT Instance
+
+29) NAT Gateway is enabling EC2 instances in private subnets to access to the internet. Let's assume there is an EC2 instance in a private subnet and we want to upgrade the software on it. What is required is to create a NAT gateway(you should have created an Elastic IP to create a NAT gateway) under VPC and put this NAT gateway in a public subnet. Then, add a rule to routing table of private subnet. This rule will mean that EC2 instances in private subnet can access to the internet via NAT Gateway. However, the opposite isn't valid, which means the internet can't access to our EC2 instances in private subnet. This is because NAT gateway isn't equal to Internet Gateway. NAT gatewaY is completed managed by AWS.
+
+![NAT](./images/031.png)
+
+30) An alternative to NAT gateway is NAT Instance. NAT Instance is an EC2 instance. NAT gateway and NAT Instance are doing the same job. However, NAT Instance is different that you are accessing from your public subnet to the internet via an EC2 instance named NAT Instance. The reason why you should prefer NAT Instance over NAT Gateway might be 
+    - if your architecture is too complicated
+    - if you are configuring TCP based settings a lot.
+    - NAT Instance is cheaper than NAT Gateway
+
+31)  To create a NAT instance, Go to EC2 and search for NAT on AMI's and choose Amazon AMI with NAT. Then instantiate EC2 instance. After creating NAT Instance, Actions > Networking > Change Source/Destination Check > Disable. Finally, go to routing table of private subnets and add a route whose destination is 0.0.0.0/0 and target is NAT Instance. This is similar to what we did for NAT Gateway.
+
+#### Endpoint
+
+32) Let's assume we have 20 EC2 instance in our public subnet. We want some of our EC2 instances to access to S3 buckets(or any other AWS services) of AWS. These EC2 instances are making the operations of reading and writing. Without endpoints, this operation is carried out on the internet. Thanks to endpoints, we are using AWS's network infrastructure to access to S3. We are creating endpoints on VPC. Creating endpoints will change routing tables by adding a new route.
+
+![endpoint](./images/032.png)
+
+#### Peering Connections
+
+33) Peering connections is binding 2 different VPC's. Let's assume there are 3 subnets on VPC A and there are 5 subnets on VPC B. We want all VM's in VPC A to access to all VM's in VPC B and vice versa. Peering connections made this possible.
+
+34) However, Let's assume we have 3 VPC's: VPC A, VPC B, VPC C. There is a peering connection between VPC A and VPC B. There is also a peering connection between VPC B and VPC C. These 2 connection doesn't mean VPC A can access to VPC C.
+
+35) We can make up a peering connection between our VPC and another VPC on another account. VPC's don't have to be in the same region to be created, one might be in Frankfurt, the other one might be in Ireland.
+
+36) The CIDR's between 2 VPC's should be different to create a peering connection.
+
+37) After creating a peering connection, attach it to routing tables via routes. Add a route with peering connection on existing routing tables.
 
 
 
