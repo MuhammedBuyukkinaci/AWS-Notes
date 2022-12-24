@@ -804,3 +804,27 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
     - Connecting your company to AWS VPC or public AWS services(S3 etc) via [IEEE 802.1Q WLAN](https://en.wikipedia.org/wiki/IEEE_802.1Q)
 
 ![directconnect](./images/034.png)
+
+### CloudFront
+
+1) CloudFront(CF) is the CDN service of AWS.
+
+2) CDN service points are available in edge locations. These edge locations exist in 29 countries, 65 cities, 149 different locations.
+
+3) Edge locations are different than AWS regions. Edge locations are for CDN services(CloudFront).
+
+4) CF is supporting HTTP verbs.
+
+4) CloudFront serves the followings:
+
+    - Caching static files.
+    - Caching dynamic content limitedly. It does this by supporting web forms, comments & login boxes, add to cart buttons.
+
+5) Creation of CF distribution may take around 30 minutes.
+
+6) Let's assume we linked CF distribution to our LB. The steps in order are below:
+
+    - A client sends a request to CF distribution
+    - In the background, CF directs request to LB.
+    - LB directs request to EC2 instances behind itself.
+
