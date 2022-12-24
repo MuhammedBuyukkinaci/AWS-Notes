@@ -815,16 +815,64 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 4) CF is supporting HTTP verbs.
 
-4) CloudFront serves the followings:
+5) CloudFront serves the followings:
 
     - Caching static files.
     - Caching dynamic content limitedly. It does this by supporting web forms, comments & login boxes, add to cart buttons.
 
-5) Creation of CF distribution may take around 30 minutes.
+6) Creation of CF distribution may take around 30 minutes.
 
-6) Let's assume we linked CF distribution to our LB. The steps in order are below:
+7) Let's assume we linked CF distribution to our LB. The steps in order are below:
 
     - A client sends a request to CF distribution
     - In the background, CF directs request to LB.
     - LB directs request to EC2 instances behind itself.
+
+### Route53
+
+#### DNS
+
+1) DNS is a notebooking including domain names and their corresponding IP addresses.
+
+![dns](./images/035.png)
+
+2) DNS servers has 2 responsibilities:
+    - Keeping domain names and their corresponding IP addresses.
+    - Returning corresponding IP address if domain name is requested.
+
+3) [icann.org](https://www.icann.org/) is managing domain registrations and other stuff.
+
+4) Decomposition of a domain name. gTLD means global top level domain.
+
+![domain](./images/036.png)
+
+![domain](./images/037.png)
+
+5) All domains have a root domain, which is equal to `.`. This `.` is invisible. There are 13 root DNS servers.
+
+#### Route53 Details
+
+6) Route53 is
+
+    - Programmable via API
+    - You can purchase domain names and manage them
+    - Serving 'Load balancing' feature
+
+![domain](./images/038.png)
+
+7) DNS record types:
+    - A record: The simplest one. I am using it for [muhammedbuyukkinaci.com](https://muhammedbuyukkinaci.com)
+    - Cname: Redirecting
+    - MX: 
+    - TXT:
+    - SRV:
+    - SPF:
+    - ALIAS:
+
+8) After purchasing domain name, Create hosted zone in 2 ways:
+    - Private zone: Available to only VPC
+    - Public zone: Open to the internet
+
+9) TTL is a feature of DNS. Let's assume TTL is 86400 seconds for google.com. You visited google.com and your browser caches what DNS server returns for 86400 seconds.
+
 
