@@ -888,4 +888,63 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 ![traffic_policies](./images/039.png)
 
+### RDS (Amazon Relational Database Service)
+
+1) RDBMS solutions AWS offers. We can create an EC2 instance and install these DB's ourselves. However, we have deal with configurations and other settings. Thus, AWS offer different RDBMS solutions under RDS. These may be regarded as SaaS.
+
+![rdbms](./images/040.png)
+
+2) Amazon DynamoDB is the No-SQL technology that AWS offers. It is completely managed by AWS, therefore we aren't required to deal with configurations. It is similar to MongoDB and an alternative to MongoDB. 
+
+![rdbms](./images/041.png)
+
+3) RDS is a fully managed DB service of AWS. **managed** means the management, configuration and installation of DB server are carried out by AWS.
+
+4) Amazon Aurora is built on top of PostgreSQL and MySQL. AWS says its Aurora service is 90 percent cheaper than Oracle SQL and Microsoft SQL server. AWS has transfer tools to migrate from Oracle SQL and Microsoft SQL server to Amazon Aurora or Maria DB.
+
+5) For RDBMS services, IO operations are as critical as CPU and RAM specifications.
+
+6) We can stop our DB servers for 7 days. If it exceeds 7 days, the DB server has been terminated.
+
+7) RDS enable DB servers to run on small/big machines elastically.
+
+8) If we take snapshots, RDS stores all transactions happened in RDS to S3 in each 5 minutes. We can roll back to any moment(in seconds) if we desire.
+
+9) Multi AZ and Read Replica(Question in the exam)
+
+![rdbms](./images/042.png)
+
+10) For production environments, we should always disable public accessibility.
+
+11) If we want to upgrade MySql engine from 5.6.X to 5.7.X, it should be carried out **manually**. However, we can upgrade MySql version from 5.6.1 to 5.6.2 **automatically** while creating RDS service.
+
+12) MySql Workbench is similar to PostgreSQL PgAdmin.
+
+13) When we created an RDS instance, AWS doesn't give us IP address to connect. AWS gives us an endpoint url.
+
+14) We can observe the performance of our RDS instance.
+
+15) If we enable reserved instances, the prices will be much cheaper. Enabling reserverd instances mean we promise to use RDS for 1 year or 3 years.
+
+16) Parameter groups is listing all configurations for an RDS instance. Let's assume we want to have 2 RDS instances. Both instances will have some custom configurations. Hence, we are creating a shared parameter group and assigning this parameter group to RDS instances. DBA's should configure this feature.
+
+![configs](./images/043.png)
+
+17) Let's assume we took a snapshot from an RDS instance. However, some problem occured in our RDS instance. Therefore, we want to restore an RDS instance from our snapshot. Former RDS instance isn't overwritten, a new RDS instance will be created from our snapshot.
+
+18) We can't access to RDS instance as we access to EC2 instance via SSH.
+
+19) When we modify an RDS instance, it will recreate it, won't overwrite.
+
+20) AWS recommends us to double everything in case of failures. Enabling Multi-AZ is something AWS recommends.
+
+21) Read Replica means growing horizontally. Multi AZ means growing vertically. Let's assume our main RDS instance is in Ireland. We want a read replica in Frankfurt. We created so. Our RDS instance in Frankfurt will reply to **read requests** to our RDS instance. However, we can't write(insert) any info to RDS instance in Frankfurt.
+
+22) If we delete an RDS instance, all automatic snapshots affiliated with the RDS instance will be automatically deleted. However, manual snapshots will not be removed.(Question in the exam)
+
+
+
+
+
+
 
