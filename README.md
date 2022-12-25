@@ -869,10 +869,23 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
     - SPF:
     - ALIAS:
 
-8) After purchasing domain name, Create hosted zone in 2 ways:
+8) After purchasing domain name, create hosted zone in 2 ways:
     - Private zone: Available to only VPC
     - Public zone: Open to the internet
 
 9) TTL is a feature of DNS. Let's assume TTL is 86400 seconds for google.com. You visited google.com and your browser caches what DNS server returns for 86400 seconds.
+
+10) Route53 is much more than DNS thanks to Routing policies feature of Route53. Different Routing Policies:
+
+    - Weighted: By only using Route53, we can create a simple LB for our A/B tests. Let's assume there is a website named website.com . The application code of this website is working on 2 EC2 instances. We configured Route53 to direct 90% of traffic to first EC2 instance and 10% of traffic to second EC2 instance. This may be called as A/B testing. This is why Route53 is much more than DNS.
+    - Latency: Latency based routing means directing traffic to nearest resource. Let's assume we are in Istanbul/Turkey and we have 2 instances(one in Frankfurt/Germany and one in Virgina/USA). If we configure it based on latency based routing, our traffic is directed to Frankfurt/Germany because It is nearer to Istanbul/Turkey.
+    - Failover: If first EC2 instance isn't accessed, direct traffic to second EC2 instance.
+    - Geolocation: Similar to Latency. We can direct traffic from Europe to Ireland irrespective of distance and we also direct traffic from Far east to Japan irrespective of the distance.
+
+11) Clous Solution Architects use Route53 frequently because it is simple and useful.
+
+12) Configuring Route53 may seem complicated. Thus, AWS launched Traffic Flow > Traffic Policies in order to tackle this challenge. Traffic Policies visualize our steps. We can combine geolocation and weighted rules via Traffic policies(and much more).
+
+![traffic_policies](./images/039.png)
 
 
