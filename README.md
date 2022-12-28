@@ -997,8 +997,23 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 15) Average operation time in DynamoDB is 10 ms, which is super good. However, it is not sufficient for some application. Therefore, AWS launced DAX accelerator feature under DynamoDB. This feature will reduce time to 2-3 ms.
 
+### Elasticache
 
+1) Elasticache is an in-memory caching service. It is fully managed. Elasticache is using redis & memcached and managing them instead of us. Redis and memcached(running on TCP port 11211) are 2 open source examples of in memory caching services. Memcached is simple but Redis has more abilities.
 
+2) Reading from RAM is much faster than reading from disc.
+
+![dynamodb](./images/046.png)
+
+3) In memory caching services store session information of online apps. It is useful in e-commerce.
+
+4) In memory caching services accelerate our web apps via caching.
+
+5) Elasticache runs on memory-optimized machines.
+
+6) We should assign a securitygroup to Elasticache because Elasticache is a resource.
+
+7) Elasticache should be located in front of DB.
 
 
 
