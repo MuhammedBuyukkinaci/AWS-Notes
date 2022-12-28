@@ -1015,6 +1015,33 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 7) Elasticache should be located in front of DB.
 
+### CloudWatch
+
+1) Cloudwatch is the monitoring service of AWS.
+
+2) A system architecture
+
+![dynamodb](./images/047.png)
+
+3) Monitoring is composed of 2 components as below. Cloudwatch does both.
+
+    - Infrastructure monitoring:
+    - Application Monitoring:
+
+4) To use Cloudwatch for EC2 instances, enable cloudwatch feature while creating EC2 instance. Enabling takes metrics per minute instead of 5 minutes.
+
+5) Widget types for Cloudwatch
+
+![dynamodb](./images/048.png)
+
+6) We can create alarms in Cloudwatch. An example is whether CPU utilization exceeds 80% or not.
+
+7) Cloudwatch isn't only creating alarms. It is able to take actions like rebooting EC2 instance, shutdowning EC2 instance etc or adding a new EC2 instance etc.
+
+8) Events is a little bit different. If an event like EC2 instance stopped. In this scenario, we can trigger something like SQS or Lambda.
+
+9) We can't observe Memory on CloudWatch by default.
+
 
 
 
