@@ -1064,3 +1064,29 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 6) By default, Cloudtrail stores data for 90 days. For more, we can configure to store in S3.
 
+### CloudFormation
+
+1) Multi tier architecture
+
+![CloudFormation](./images/049.png)
+
+2) CloudFormation is providing a common language for all infrastructure resources. This language can be in YAML or JSON.
+
+3) An example cloudformation template
+
+![CloudFormation](./images/050.png)
+
+4) Cloudformation is an IaC tool. It is faciliating the jobs of cloud solution architects. We can save time thanks to CloudFormation + Chef + Puppet.
+
+![CloudFormation](./images/051.png)
+
+5) Cloudformation template sections. All templates should have **resources**.
+
+![CloudFormation](./images/052.png)
+
+6) We can create a stack via GUI by dragging and dropping. We can also create a stack via a template.
+
+7) We can access to an example template via [this link](https://s3-us-west-2.amazonaws.com/cloudformation-templates-us-west-2/VPC_AutoScaling_and_ElasticLoadBalancer.template).
+
+
+
