@@ -1042,6 +1042,14 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 9) We can't observe Memory on CloudWatch by default.
 
+10) Access logs of NGINX is storing all information viewing our website. We can view logs of our EC2 instances in Cloudwatch logs. To do this, install cloudwatch agent on our EC2 instances or on premise machines. We can send statistics regarding RAM to cloudwatch via cloudwatch agent.
+
+11) In order for EC2 instance to send logs(or any data) to Cloudwatch, we should create a role under IAM and assign this role to EC2 instance.
+
+12) [Splunk](https://www.splunk.com/en_us/blog/learn/log-management.html) is an alternative to Cloudwatch for log management.
+
+
+
 
 
 
