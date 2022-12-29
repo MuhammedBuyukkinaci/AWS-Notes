@@ -1048,8 +1048,19 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 12) [Splunk](https://www.splunk.com/en_us/blog/learn/log-management.html) is an alternative to Cloudwatch for log management.
 
+### CloudTrail
 
+1) API is a door enabling apps or services to talk to other apps or services
 
+2) We are sending API calls from Management Console, CLI or SDK. Let's assume we want to create an EC2 instance. If we do this via Management Console or CLI or SDK, all will send a request to related API.
 
+3) Cloudtrail is a record book of AWS. It is storing which user took which action from which IP.
 
+4) Cloudtrail is different than CloudWatch. Cloudwatch is related to monitoring of resources. Cloudtrail is about logging & management of IAM users.
+
+5) Cloudtrail is solving 2 problems:
+    - It logs every event in case of unexpected event.
+    - Some regulations want us to store these info.
+
+6) By default, Cloudtrail stores data for 90 days. For more, we can configure to store in S3.
 
