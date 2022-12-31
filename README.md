@@ -1160,10 +1160,27 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 1) Opswork is a configuration management tool. It is fully managed. It is serving chef and puppet as fully managed on AWS. Chef and puppet are platforms allowing us to configure our on premise VM's or EC2 instances.
 
+![OpsWork](./images/057.png)
+
 2) Chef and Puppet are 2 alternatives to OpsWork.
 
 3) Opswork is automatizating setting configurations of our on premise VM's or EC2 instances.
 
+### AWS Lambda & Api Gateway
+
+1) FaaS(Function as a service) is another name of Serverless. There are still servers in the serverless. Lambda is AWS's FaaS service.
+
+2) The former is Microservice architecture. The second is Serverless architecture.
+
+![Lambda](./images/058.png)
+
+![Lambda](./images/059.png)
+
+3) Api Gateway is AWS's Api Gateway service. Api Gateway is enabling us to create REST API's.
+
+![Lambda](./images/060.png)
+
+4) Functions in Lambda act as a microservice.
 
 
 
