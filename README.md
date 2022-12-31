@@ -1088,5 +1088,37 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 7) We can access to an example template via [this link](https://s3-us-west-2.amazonaws.com/cloudformation-templates-us-west-2/VPC_AutoScaling_and_ElasticLoadBalancer.template).
 
+## Additional AWS Services
 
+### SNS - Simple otification Service
+
+1) SNS is a fully managed notification service. It is push based
+
+2) SNS components are depicted below in the image. Its structure is similar to Apache Kafka. SNS has publisher-subscriber architecture.
+
+![SNS](./images/053.png)
+
+3) We can send push notifications & SMS's on mobile apps via SNS.
+
+### SQS - Simple Queue Service
+
+1) SQS is a fully managed service whose arcihtecture is producer-consumer.
+
+![SQS](./images/054.png)
+
+2) SQS is a message broker similar to RabbitMQ and Kafka.
+
+3) Different types of queues in SQS. Standard vs FIFO.
+
+![SQS](./images/055.png)
+
+4) We can send messages to SQS from the programs that we wrote via AWS SDK.
+
+### SWF - Simple Workflow Service
+
+1) It is a service designed for developers.
+
+2) It is similar to Apache Airflow or Spotify Luigi.
+
+3) SWF is a workflow management service. It isn't doing any job actually.
 
