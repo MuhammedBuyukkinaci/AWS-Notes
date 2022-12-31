@@ -1122,3 +1122,26 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 3) SWF is a workflow management service. It isn't doing any job actually.
 
+### SES - Simple Email Service
+
+1) It is a fully managed e-mail sending service.
+
+2) SES isn't designed for personal daily usages.
+
+3) 1000 emails costs 0.1 dollar.
+
+4) Sendgrid & Mailgun are alternatives to AWS SES.
+
+5) We can upload templates for e-mails. The templates use jinja templating. The template format is json.
+
+### Kinesis
+
+1) Kinesis is important but complicated. Kinesis is a data streaming service.
+
+2) What Kinesis does is similar to What SQS does. One message can be consumed by 2 consumers in Kinesis. However, one message can't be consumed by 2 consumers in SQS.
+
+![Kinesis](./images/056.png)
+
+3) Write speed of one shard is 1 MB per second and read speed of one shard is 2 MB per second. How many shards to use is an hyperparameter of our software architecture.
+
+4) Let's assume we have a fraud detection pipeline. Transactions are passed to Kinesis. One of our apps detects fraud on transactions via consuming Kinesis and one app can make reports about transactions on Kinesis via consuming Kinesis.
