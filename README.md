@@ -1145,3 +1145,31 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 3) Write speed of one shard is 1 MB per second and read speed of one shard is 2 MB per second. How many shards to use is an hyperparameter of our software architecture.
 
 4) Let's assume we have a fraud detection pipeline. Transactions are passed to Kinesis. One of our apps detects fraud on transactions via consuming Kinesis and one app can make reports about transactions on Kinesis via consuming Kinesis.
+
+### Config
+
+1) Config is a configuration tracking tool.
+
+2) It is recording modifications of our configurations on AWS services. It is saving changes to S3 buckets.
+
+3) Let's assume we made some modifications on our EC2 instance. These changes will be displayed in Config.
+
+3) Config is also able to list compliance issues that we specified via a rule.
+
+### OpsWork
+
+1) Opswork is a configuration management tool. It is fully managed. It is serving chef and puppet as fully managed on AWS. Chef and puppet are platforms allowing us to configure our on premise VM's or EC2 instances.
+
+2) Chef and Puppet are 2 alternatives to OpsWork.
+
+3) Opswork is automatizating setting configurations of our on premise VM's or EC2 instances.
+
+
+
+
+
+
+
+
+
+
