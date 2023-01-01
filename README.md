@@ -1182,11 +1182,19 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 4) Functions in Lambda act as a microservice.
 
+### Container - ECS - EKS - ECR - Fargate
 
+1) Docker image is an anology to Amazon AMI.
 
+2) Rkt and Podman are 2 alternatives to Docker containers.
 
+3) ECS is Elastic Container Service. It is a fully managed service. It is a substitute for k8s and Swarm. ECS is asking you to choose EC2 machines, core numbers etc.
 
+4) Fargate is a forward step to ECS. It isn't asking you about VM informations. Fargate is a fully managed service.
 
+5) EKS is Elastic Kubernetes Service. It is doing what ECS does. The difference is that ECS uses AWS's own orchestration software and EKS is using k8s.
+
+6) ECR is Elastic Container Registry. It is an image registry service. It is a competitor of Dockher Hub. It is fully managed.
 
 
 
