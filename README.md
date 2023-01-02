@@ -1196,5 +1196,50 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 6) ECR is Elastic Container Registry. It is an image registry service. It is a competitor of Dockher Hub. It is fully managed.
 
+### AWS Key Management Service(KMS)
+
+1) It is managing encryption-decryption system.
+
+2) It is integrated with AWS CloudTrail.
+
+3) We can schedule deletion of keys.
+
+### AWS Directory Service
+
+1) Directory service illustration
+
+![Directory Service](./images/061.png)
+
+2) Microsoft Active Directory and Linux's Samba 4 are 2 main active directory softwares.
+
+3) AWS Directory Service is the fully managed directory service of AWS.
+
+### Snowball
+
+1) It is a service that you put your data into a physical device and send it to AWS.
+
+2) It is a transfer tool.
+
+### Storage Gateway
+
+1) It is service to empower hybrid(on premises and cloud).
+
+![Storage Gateway](./images/062.png)
+
+2) Storage Gateway is disaster recovery service of AWS.
+
+3) Different Types of Storage Gateway
+
+    - File Gateway
+    - Volume Gateway - Shared
+    - Volume Gateway - Cached
+    - Tape Gateway
+
+### AWS Organizations
+
+1) It is an AWS service faciliating management of many AWS accounts by creating policies.
+
+
+
 
 
