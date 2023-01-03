@@ -1239,7 +1239,14 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 1) It is an AWS service faciliating management of many AWS accounts by creating policies.
 
+### Project
 
+1) The visualization of the project is below:
 
+![visualization](./images/063.png)
+
+2) The code can be located in EFS and shared by many EC2 instances.
+
+3) You can access to instructions under **/files/step_by_step_notes.txt** folder.
 
 
