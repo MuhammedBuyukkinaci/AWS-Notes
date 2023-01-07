@@ -145,7 +145,7 @@ pip install awscli
     - S3: This is the service that booms Cloud Computing. It is storing the data irrespective of its source. S3 is object-base rather than blog-based. We can hold files whose sizes are between 0 KB to 5 TB.
     - EFS(Elastic File System): It can be thought as a flexible hard disc. Many computers can access to it simultaneously.
     - Glacier: Long-term & cheap & archiving service. Similar to S3.
-    - Storage Gateway: Some firms use their own servers locally. owever, they want to keep their backups on the cloud in case of disaster recovery.
+    - Storage Gateway: Some firms use their own servers locally. However, they want to keep their backups on the cloud in case of disaster recovery.
 
 4) Database services are listed below.
 
@@ -585,8 +585,8 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
     - Autoscaling is composed of 2 main components. The first one is Launchconfig(just not for Autoscaling). Launchconfig covers all of the configurations(which image to use, mount external volumes etc) to instantiate an EC2 instance. Launchconfig is similar to Dockerfile or recipy of a meal. Launchconfig is similar to creating to an EC2 instance except no creation happens.
 
     - After creating a Launchconfig, we should create AutoScaling Group. This group will use LaunchConfig in the previous step. We can set the number of VM's under AutoScaling Group(like between 2-7 etc). 2-7 machines means there should be at least 2 machines or at most 7 machines. Autoscaling group enables us to add VM's to machines behind an ELB.
-
-        - Create an ELB.
+        - Create a target group
+        - Create an ELB using the target group above.
         - Create a Launchconfig.
         - Create Autoscaling group via launchconfig created above. This autoscaling group should use above ELB configuration to add more VM's to an existing architecture.
 
@@ -807,7 +807,7 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 ### CloudFront
 
-1) CloudFront(CF) is the CDN service of AWS.
+1) CloudFront(CF) is the CDN service of AWS. Cloudflare is an alternative to CloudFront of AWS.
 
 2) CDN service points are available in edge locations. These edge locations exist in 29 countries, 65 cities, 149 different locations.
 
@@ -1239,7 +1239,7 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 1) It is an AWS service faciliating management of many AWS accounts by creating policies.
 
-### Project
+## Project
 
 1) The visualization of the project is below:
 
@@ -1248,5 +1248,41 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 2) The code can be located in EFS and shared by many EC2 instances.
 
 3) You can access to instructions under **/files/step_by_step_notes.txt** folder.
+
+## Exam
+
+1) [AWS certified solution architect associate SAA-C01 exam](https://aws.amazon.com/certification/certified-solutions-architect-associate/?ch=tile&tile=getstarted)'s price is 150$. Trial exam is 20$. It is available in English, Chinese, Japanese.
+
+2) We have to answer all questions. Therefore, all questions should be answered. There are 65 questions. Some questions require us to choose one of 4 answers. Some questions require us to choose two of 5 answers.
+
+3) Points of questions aren't the same. Some brings higher points, some brings lower points, some brings no point. Therefore, we should be above 720. The exam point is between 100 and 1000.
+
+4) Where some questions are from
+
+![questions](./images/064.png)
+
+5) To register the exam, click [here](https://www.aws.training/).
+
+6) AWS Certified Cloud Practitioner CLF-C01 is entry level exam.
+
+7) Pearson Vue is offering more locations to take AWS exam.
+
+8) This exam is requiring us to bring 2 ID's(national ID, driving license, credit card etc)
+
+9) Some resources to learn more
+
+    - [Architecting for the cloud](https://d1.awsstatic.com/whitepapers/AWS_Cloud_Best_Practices.pdf)
+    - [AWS Well-Architected Framework](https://d1.awsstatic.com/whitepapers/architecture/AWS_Well-Architected_Framework.pdf)
+    - FAQ's of the services
+    ![questions](./images/065.png)
+
+## 2020 Updates
+
+1) SAA-C01 exam was renamed to SAA-C02 exam as of July 2020.
+
+2) DataSync is a new service of AWS in 2020. It is enabling us to transfer data from/to AWS/Our on premise servers. It is fully managed. DataSync is up to 10x faster. GB price is 0.0125. If we ahave a local NFS device and wat the data in it to transfer to AWS, the way would be DataSync.
+
+3) FSx is a service similar to EFS. EFS was an NFS service for Linux-based machines and FSx is for Windows servers. It is AWS's managed file server. FSx service has 2 different services: (Amazon FSx for windows file server & Amazon FSx for lustre(high performance computing) ). We have to assign a security group like assigning a security group to EFS. We should affiliate FSx with an active directory. FSx uses SMB protocol.
+
 
 
