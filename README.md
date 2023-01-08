@@ -578,6 +578,8 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
     - After creating the ELB, we don't see the IP address of it. We just see its DNS name.
 
+    - ELB's are region based.
+
 #### AutoScaling
 
 33) Autoscaling is automatically adding a VM or removing a VM according to request counts. The automaticon process is dependent on our custom rules. The rule might be that add a new VM if CPU usage exceeds 90% for 5 minutes and remove a VM if its CPU usage becomes below under 30%.
@@ -1284,5 +1286,32 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 3) FSx is a service similar to EFS. EFS was an NFS service for Linux-based machines and FSx is for Windows servers. It is AWS's managed file server. FSx service has 2 different services: (Amazon FSx for windows file server & Amazon FSx for lustre(high performance computing) ). We have to assign a security group like assigning a security group to EFS. We should affiliate FSx with an active directory. FSx uses SMB protocol.
 
+4) Easy Create is a new feature of RDS. It faciliates DB creation.
 
+5) AWS introduces Serverless feature for Amazon Aurora under RDS. This Serverless feature is only available for RDS. It provides a flexiblity for resources like RAM and CPU. These resources are renamed as ACU's(Aurora Capacity Units) It acts as an autoscaling.
 
+6) Global Accelerator is the most important service that AWS launched in 2020. It isn't a cheap service. It isn't DNS based. Global Accelerator is static IP based.
+
+7) HPC is High Performance Computing. It isn't a service. It is a way of managing EC2 instances. It is useful for data processing. It is a super-computer. It is used in Genetics research and Weather Forecast. C5n instances are for high performance computing. AWS introduced EFA(Elastic Fabric Adapter) as a network interface for HPC to have a better networking. AWS Parallel Cluster is quickly to build HPC compute environments on AWS.
+
+8) AWS Outposts is hybrid solution between on premises and cloud. It is a rack cabinet.
+
+![rack_cabinet](./images/066.png)
+
+9) AWS Control Tower is a further step of AWS organizations. It is automating the creation of AWS accounts. It is for enterprise usage.
+
+10) EC2 Image Builder is a new AWS service. It is faciliating image creation phase from EC2. After creating an image via EC2 Image builder, we can deploy it on different regions.
+
+11) Amazon QLDB and Amazon DocumentDB are 2 new database services of AWS as of 2020.
+
+12) AWS IQ is a new service that enables us to rent an AWS Solution Architect for a fixed time.
+
+13) AWS Amplify is a tool for developers. It is simplifying mobile and web development. It is a framework + CLI.
+
+## 2021 Updates
+
+1) AWS backup is a new service of AWS. It is faciliating the management of back ups. It supports EBS, EC2, RDS, DynamoDB, EFS, Storage Gateway, FSx.
+
+2) AWS Transfer Family is a new service of AWS. It is a fully managed service of SFTP, FTPS and FTP.
+
+3) CloudShell is a new service of AWS. It faciliates usage of shell on browser in AWS website.
