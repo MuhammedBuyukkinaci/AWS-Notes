@@ -1092,7 +1092,7 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 ## Additional AWS Services
 
-### SNS - Simple otification Service
+### SNS - Simple Notification Service
 
 1) SNS is a fully managed notification service. It is push based
 
@@ -1196,7 +1196,7 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 5) EKS is Elastic Kubernetes Service. It is doing what ECS does. The difference is that ECS uses AWS's own orchestration software and EKS is using k8s.
 
-6) ECR is Elastic Container Registry. It is an image registry service. It is a competitor of Dockher Hub. It is fully managed.
+6) ECR is Elastic Container Registry. It is an image registry service. It is a competitor of Docker Hub. It is fully managed.
 
 ### AWS Key Management Service(KMS)
 
@@ -1315,3 +1315,18 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 2) AWS Transfer Family is a new service of AWS. It is a fully managed service of SFTP, FTPS and FTP.
 
 3) CloudShell is a new service of AWS. It faciliates usage of shell on browser in AWS website.
+
+## Sagemaker
+
+1) The source is [source 1](https://www.youtube.com/watch?v=1eQC259cVcI&ab_channel=GreatLearning) and [source 2](https://www.youtube.com/watch?v=AVNqdT5ilOg&ab_channel=Simplilearn). ML Libraries are installed in Sagemaker. Just run a notebook and import the libraries.
+
+2) It is a PaaS.
+
+3) The machine that the notebook runs is different than the machine that real training happens.
+
+![sagemaker](./images/067.png)
+
+4) Overview
+
+![sagemaker](./images/068.png)
+
