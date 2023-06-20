@@ -1320,7 +1320,11 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 1) The source is [source 1](https://www.youtube.com/watch?v=1eQC259cVcI&ab_channel=GreatLearning) and [source 2](https://www.youtube.com/watch?v=AVNqdT5ilOg&ab_channel=Simplilearn). ML Libraries are installed in Sagemaker. Just run a notebook and import the libraries.
 
-2) It is a PaaS.
+2) It is a PaaS. Actually, it isn't a service. It is a collection of things. It isa service for
+    - Prepare data
+    - Build ML model
+    - Train and tune the model
+    - Deploy and manage the processes
 
 3) The machine that the notebook runs is different than the machine that real training happens.
 
@@ -1329,4 +1333,25 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 4) Overview
 
 ![sagemaker](./images/068.png)
+
+5) 3 different UI's in Sagemaker
+
+    - AWS Sagemaker
+    - Sagemaker Notebooks
+    - Sagemaker Studio: An notebook-centric IDE
+
+6) 3 different ways of Machine Interface
+    - API
+    - SDK(Boto3)
+    - Sagemaker SDK
+
+7) 3 different ways of Infrastructure level
+    - Sagemaker Containers: Having libraries to run our PyTorch or Tensorflow code.
+    - Built-in Algorithms(Containers): A fully managed service
+    - Container Orchestration: A place where containers can run
+
+![sagemaker](./images/069.png)
+
+
+
 
