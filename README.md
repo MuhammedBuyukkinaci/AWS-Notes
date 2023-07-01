@@ -1352,6 +1352,10 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 ![sagemaker](./images/069.png)
 
+## More
+
+1) AWS CLoud9 is a cloud based IDE service of AWS.
+
 
 
 
