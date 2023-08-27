@@ -1356,6 +1356,6 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 1) AWS CLoud9 is a cloud based IDE service of AWS.
 
-
+2) [Cloud Guru](https://www.pluralsight.com/cloud-guru) and [Cloud Academy](https://cloudacademy.com/) are 2 websites to learn cloud.
 
 
