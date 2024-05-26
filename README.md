@@ -1358,4 +1358,6 @@ aws s3 cp s3://bucket_name_is_here/object_name_in_bucket /path/in/ec2
 
 2) [Cloud Guru](https://www.pluralsight.com/cloud-guru) and [Cloud Academy](https://cloudacademy.com/) are 2 websites to learn cloud.
 
+3) [Vercel](https://vercel.com/) and [Netlify](https://www.netlify.com/) are using AWS Lambda behind the scenes.
+
 
